@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedro & Alana - Nosso Casamento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <!-- Navegação -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#inicio" class="nav-logo">P & A</a>
+            <button class="nav-toggle" id="navToggle" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#inicio">Início</a></li>
+
+                <li><a href="#evento">O Evento</a></li>
+                <li><a href="#presentes">Presentes</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#confirmar">Confirmar Presença</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="inicio">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle fade-in">Com alegria no coração, convidamos você para celebrar</p>
+            <h1 class="hero-title fade-in">Pedro <span class="ampersand">&</span> Alana</h1>
+            <div class="hero-date fade-in">
+                <span class="hero-line"></span>
+                <p>30 de Outubro de 2026</p>
+                <span class="hero-line"></span>
+            </div>
+            <p class="hero-msg fade-in" style="font-size: 1rem; opacity: 0.85; max-width: 500px; margin: 0 auto 30px; line-height: 1.8;">Nosso amor está prestes a se tornar uma história para a vida toda, e nada seria tão especial sem a sua presença neste dia.</p>
+            <a href="#evento" class="hero-btn fade-in">Detalhes do Evento</a>
+            <a href="#confirmar" class="hero-btn fade-in" style="margin-left:15px; background: rgba(255,255,255,0.1);">Confirmar Presença</a>
+        </div>
+        <div class="scroll-indicator">
+            <span></span>
+        </div>
+    </section>
+
+    <!-- Contagem Regressiva -->
+    <section class="countdown-section">
+        <div class="container">
+            <h2 class="section-subtitle">Faltam</h2>
+            <div class="countdown" id="countdown">
+                <div class="count-item">
+                    <span class="count-number" id="dias">0</span>
+                    <span class="count-label">Dias</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="horas">0</span>
+                    <span class="count-label">Horas</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="minutos">0</span>
+                    <span class="count-label">Minutos</span>
+                </div>
+                <div class="count-item">
+                    <span class="count-number" id="segundos">0</span>
+                    <span class="count-label">Segundos</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- O Evento -->
+    <section class="section evento" id="evento">
+        <div class="container">
+            <h2 class="section-title">O Evento</h2>
+            <p class="section-subtitle">Detalhes da celebração</p>
+
+            <div class="evento-grid">
+                <div class="evento-card fade-in-up">
+                    <div class="evento-icon">🥂</div>
+                    <h3>Celebração & Recepção</h3>
+                    <p class="evento-hora">17:00</p>
+                    <p class="evento-local">R. Joelma São Mendes, 168</p>
+                    <p class="evento-endereco">Lauro de Freitas - BA, 42700-000<br>Em frente à Creche Escola Peniel</p>
+                    <a href="https://www.google.com/maps/search/R.+Joelma+São+Mendes+168+Lauro+de+Freitas+BA" class="evento-mapa" target="_blank">Ver no mapa</a>
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+    <!-- Lista de Presentes -->
+    <section class="section presentes" id="presentes">
+        <div class="container">
+            <h2 class="section-title">Lista de Presentes</h2>
+            <p class="section-subtitle">Casamento & Chá de Casa Nova 🏡 Escolha um presente para abençoar esse novo lar</p>
+
+            <div class="presentes-grid">
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/jogo-de-talheres-tramontina-inox-colher-faca-garfo-24-pecas-inox/ecomba/buzi-24/5e5c40ea4fdc407ab9ac84c4c9607fbe.jpeg" alt="Kit de Talheres">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Kit de Talheres 24pç</h3>
+                        <p class="presente-valor">R$ 114,30</p>
+                        <button class="btn-presente" data-item="Kit de Talheres 24pç" data-valor="114.30">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/jogo-de-copos-de-vidro-440ml-6-pecas-haus-concept-prince/magazineluiza/238950500/ed05862039e8bf380545e26cb902b89f.jpg" alt="Jogo de Copos">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Jogo de Copos 6pç</h3>
+                        <p class="presente-valor">R$ 59,90</p>
+                        <button class="btn-presente" data-item="Jogo de Copos 6pç" data-valor="59.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/450pxx450px/aspirador-de-po-vertical-electrolux-1100w-powerspeed-2-em-1-eletrolux/carrefouroficial/900012657/34eea8bad2c3ba28232d7d7eb1c2023a.jpeg" alt="Aspirador de Pó">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Aspirador de Pó Electrolux</h3>
+                        <p class="presente-valor">R$ 199,90</p>
+                        <button class="btn-presente" data-item="Aspirador de Pó Electrolux" data-valor="199.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/jogo-de-panelas-antiaderente-ceramica-cooktop-fogao-inducao-kit-6-pecas-conjunto-marmol-mimostyle/magazinegeraiscomercio/ut1902-1/ed225d741a01115f8f3fce065d508795.jpeg" alt="Jogo de Panelas">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Jogo de Panelas 6pç</h3>
+                        <p class="presente-valor">R$ 480,10</p>
+                        <button class="btn-presente" data-item="Jogo de Panelas 6pç" data-valor="480.10">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/280x210/jogo-de-toalhas-4-pecas-marselha-100-algodao-felpudas-sarah-enxovais/toalhassarah/410052/fd03adc4da24a21e64c34e1f89e6ee22.jpeg" alt="Jogo de Toalhas">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Jogo de Toalhas 4pç</h3>
+                        <p class="presente-valor">R$ 169,90</p>
+                        <button class="btn-presente" data-item="Jogo de Toalhas 4pç" data-valor="169.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/%7Bw%7Dx%7Bh%7D/jogo-de-cama-casal-padrao-100-algodao-percal-200-fios-03-pecas-tecido-grosso-macio-cama-box-lindo-mf-enxovais/mfenxovais/15941742290/b84761ccc6e9d76e5aa99f01a6c27c13.jpeg" alt="Jogo de Cama Casal">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Jogo de Cama Casal 6pç</h3>
+                        <p class="presente-valor">R$ 149,90</p>
+                        <button class="btn-presente" data-item="Jogo de Cama Casal 6pç" data-valor="149.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/liquidificador-mondial-turbo-3-velocidades-110v-preto/loibrasil/11156/a1725515b0c609f66de9ba4f3d2be5b3.jpg" alt="Liquidificador">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Liquidificador Mondial Turbo</h3>
+                        <p class="presente-valor">R$ 139,90</p>
+                        <button class="btn-presente" data-item="Liquidificador Mondial Turbo" data-valor="139.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/fritadeira-air-fryer-mondial-oven-12l-preto-e-inox-afo12/angeloni2/5116519/40b8ff199fcf1559f62c27d562588789.jpg" alt="Air Fryer">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Air Fryer Mondial 12L</h3>
+                        <p class="presente-valor">R$ 489,90</p>
+                        <button class="btn-presente" data-item="Air Fryer Mondial 12L" data-valor="489.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up presenteado">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/ferro-de-passar-black-decker-seco-preto-ferro-passar-antigo-black-decker/encomendamaiseletrosp/14130240792/0a49538127790b5d7adf42aea29b5bc8.jpg" alt="Ferro de Passar">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Ferro de Passar Black+Decker</h3>
+                        <p class="presente-valor">R$ 99,90</p>
+                        <button class="btn-presente" data-item="Ferro de Passar Black+Decker" data-valor="99.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/jogo-de-pratos-rasos-jantar-refeicao-28cm-kit-4-pecas-azzura-porcelana-decorada-floral-tramontina/magazinegeraiscomercio/ut5420/45f4308349ec332b5b3cdace28d5a5da.jpeg" alt="Jogo de Pratos">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Jogo de Pratos Tramontina 4pç</h3>
+                        <p class="presente-valor">R$ 119,90</p>
+                        <button class="btn-presente" data-item="Jogo de Pratos Tramontina 4pç" data-valor="119.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/micro-ondas-mondial-34l-espelhado-mo-02-34-e/magazineluiza/236537700/9dd71432e1a0346fdb903d7fda9a9344.jpg" alt="Micro-ondas">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Micro-ondas Mondial 34L</h3>
+                        <p class="presente-valor">R$ 529,90</p>
+                        <button class="btn-presente" data-item="Micro-ondas Mondial 34L" data-valor="529.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/470x352/batedeira-planetaria-mondial-preto-e-inox-700w-premium-12-velocidades/magazineluiza/021259300/d63c859ff503ef3e0186d5288be41c71.jpg" alt="Batedeira Planetária">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Batedeira Planetária Mondial</h3>
+                        <p class="presente-valor">R$ 349,90</p>
+                        <button class="btn-presente" data-item="Batedeira Planetária Mondial" data-valor="349.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/chaleira-eletrica-mondial-pratic-inox-jarra-de-2-litros-ce-06-ferve-agua-p-cha-chimarrao-leite-em-po/lojamegaeletro2/5817731134/983493948d5a38aa0d98798130805c4b.jpeg" alt="Chaleira Elétrica">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Chaleira Elétrica Mondial 2L</h3>
+                        <p class="presente-valor">R$ 89,90</p>
+                        <button class="btn-presente" data-item="Chaleira Elétrica Mondial 2L" data-valor="89.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/420x420/jogo-de-6-tacas-de-vidro-diamante-transparente-340ml-original/lojasrenascerd/sl0826/5a498338d31e282e770616c846af3d33.jpeg" alt="Jogo de Taças">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Jogo de Taças 6pç</h3>
+                        <p class="presente-valor">R$ 89,90</p>
+                        <button class="btn-presente" data-item="Jogo de Taças 6pç" data-valor="89.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/conjunto-kit-utensilios-de-cozinha-silicone-inox-jogo-de-utensilio-10-pecas-colheres-espatulas-conchas-pegadores-lumai/idzsolucoes/14778821771/0b2d051d470523ceb79337b05b1e8bd9.jpeg" alt="Kit Utensílios de Cozinha">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Kit Utensílios Cozinha 10pç</h3>
+                        <p class="presente-valor">R$ 79,90</p>
+                        <button class="btn-presente" data-item="Kit Utensílios Cozinha 10pç" data-valor="79.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/280x210/frigideira-funda-tramontina-loreto-24cm-antiaderente-wok-22-litros/setemare/ftl24/d513bd9d17cf761c07cf83a31af54cb4.jpg" alt="Frigideira Antiaderente">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Frigideira Tramontina 24cm</h3>
+                        <p class="presente-valor">R$ 89,90</p>
+                        <button class="btn-presente" data-item="Frigideira Tramontina 24cm" data-valor="89.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/420x420/jogo-de-facas-tramontina-felice-de-aco-inox-5-pecas-cores-sortidas-tramontina-23499078/trpstore/58834/79175bf789624d2aff3708dde9f64847.jpeg" alt="Jogo de Facas">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Jogo de Facas Tramontina 5pç</h3>
+                        <p class="presente-valor">R$ 49,99</p>
+                        <button class="btn-presente" data-item="Jogo de Facas Tramontina 5pç" data-valor="49.99">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/420x420/prancha-em-pinus-40x25-com-canaleta-edal/edaltorneadosdemadeirasltda/145/0eb52d47d78ae63a6f93e5908ae286fe.jpeg" alt="Tábua de Corte">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Tábua de Corte Pinus</h3>
+                        <p class="presente-valor">R$ 59,90</p>
+                        <button class="btn-presente" data-item="Tábua de Corte Pinus" data-valor="59.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/420x420/aparelho-de-jantar-porcelana-legacy-filete-dourado-42-pecas-full-fit/casacenter/6294/a11678e6263b921925fbb9e3eec87880.jpeg" alt="Aparelho de Jantar">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Aparelho de Jantar 42pç</h3>
+                        <p class="presente-valor">R$ 287,90</p>
+                        <button class="btn-presente" data-item="Aparelho de Jantar 42pç" data-valor="287.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/kit-toalha-banho-e-rosto-4-pecas-prata-100-algodao-fio-penteado-alta-absorcao-buettner-bouton/casalanina/bt-jgt-2b2r-nat-pct-600/845d036f5ba1d46a96e28b3860fbf0e4.jpeg" alt="Kit Toalhas Banho">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Kit Toalhas Banho 4pç</h3>
+                        <p class="presente-valor">R$ 149,90</p>
+                        <button class="btn-presente" data-item="Kit Toalhas Banho 4pç" data-valor="149.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/cortinas-aersas-natural-pinch-linho-plissado-214-cm-de-comprimento-2-paineis/nocnocestadosunidos/buybox-cpb0cnlrsrnw/c3370630a655fe1008090242c57f9014.jpeg" alt="Cortinas">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Cortinas</h3>
+                        <p class="presente-valor">R$ 89,90</p>
+                        <button class="btn-presente" data-item="Cortinas" data-valor="89.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/porta-tempero-de-vidro-10-pecas-brinox-lock-stock/magazineluiza/240128700/ad5bd42997fc802543f82673241c26af.jpg" alt="Porta Temperos">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Porta Temperos</h3>
+                        <p class="presente-valor">R$ 49,90</p>
+                        <button class="btn-presente" data-item="Porta Temperos" data-valor="49.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/mop-giratorio-8-litros-com-cesto-em-inox-cabo-de-140cm-2-refis-nybc/nybcloja/7908893385187/00c186b4385933e03453e2589fdb42f4.jpeg" alt="Mop Giratório">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Mop Giratório</h3>
+                        <p class="presente-valor">R$ 105,44</p>
+                        <button class="btn-presente" data-item="Mop Giratório" data-valor="105.44">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/escorredor-de-pratos-20-pratos-montado-porta-talher-em-aco-inox-100-original-mak-inox/multicompras010/15927332140/b947ca2bf6bb2ff0cf0a7b3fc1a094bc.jpeg" alt="Escorredor de Pratos Inox">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Escorredor de Pratos Inox</h3>
+                        <p class="presente-valor">R$ 129,99</p>
+                        <button class="btn-presente" data-item="Escorredor de Pratos Inox" data-valor="129.99">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/varal-de-chao-vertical-para-roupas-3-andares-dobravel-portatil-grande-kontuz/nawebutilidade/14819392694/f22670296a9bfbea43a1c9a381c9fd87.jpeg" alt="Varal de Chão">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Varal de Chão</h3>
+                        <p class="presente-valor">R$ 69,90</p>
+                        <button class="btn-presente" data-item="Varal de Chão" data-valor="69.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/cesto-de-roupa-suja-de-bambu-com-tampa-e-alcas-50-litros-organizador-lavanderia-brinquedos-kontuz-home/nawebutilidade/cesto03/c7b9e16736157ff400cabc1e1769621c.jpeg" alt="Cesto de Roupas">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Cesto de Roupas</h3>
+                        <p class="presente-valor">R$ 72,90</p>
+                        <button class="btn-presente" data-item="Cesto de Roupas" data-valor="72.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/280x210/jogo-de-lencol-queen-4-pecas-percal-400-fios-premium-rt-enxovais/rtenxovais/jgqueen-400-est/0f40739692cc1c20895777c50e5a5eed.jpeg" alt="Jogo de Lençol">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Jogo de Lençol</h3>
+                        <p class="presente-valor">R$ 115,00</p>
+                        <button class="btn-presente" data-item="Jogo de Lençol" data-valor="115">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/420x420/kit-3-travesseiros-hedrons-sono-suave-antialergico-50x70-cm/lorraine-enxovais/k3trhedson/8da5cd52c2eb1928f639ca7e6c671386.jpeg" alt="Travesseiros">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Travesseiros</h3>
+                        <p class="presente-valor">R$ 49,90</p>
+                        <button class="btn-presente" data-item="Travesseiros" data-valor="49.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/280x210/jogo-de-potes-de-vidro-brinox-com-tampa-retangular-lock-stock-6-pecas/magazineluiza/240274100/a63df4aa6120b4b4dca859c9de15c0b3.jpg" alt="Conjuntos de Potes">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Conjuntos de Potes</h3>
+                        <p class="presente-valor">R$ 69,90</p>
+                        <button class="btn-presente" data-item="Conjuntos de Potes" data-valor="69.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/420x420/travessa-refrataria-de-vidro-retangular-linha-borcam-3-850-ml/portinoxpresentes/46ac350e04e711f0a49d42010a4808f6/38dda1e31a95253df99387bb9bc288b9.jpg" alt="Travessa de Vidro">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Travessa de Vidro</h3>
+                        <p class="presente-valor">R$ 64,99</p>
+                        <button class="btn-presente" data-item="Travessa de Vidro" data-valor="64.99">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://a-static.mlcdn.com.br/420x420/jogo-de-assadeiras-tramontina-antiaderente-retangular-funda-forma-de-bolo/ecomba/kit-4-assadeira-tramontina/1be198aaec7a1cf3a1085c29a44d8d19.jpeg" alt="Assadeiras para Bolo">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Assadeiras para Bolo</h3>
+                        <p class="presente-valor">R$ 69,90</p>
+                        <button class="btn-presente" data-item="Assadeiras para Bolo" data-valor="69.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/boleira-de-vidro-centro-de-mesa-com-tampa-ambar-espelhado-31cm-casambiente/globaleletro/9875p/76ed6b4428a39b9d449712aebaf22024.jpeg" alt="Boleira">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Boleira</h3>
+                        <p class="presente-valor">R$ 69,90</p>
+                        <button class="btn-presente" data-item="Boleira" data-valor="69.90">Presentear</button>
+                    </div>
+                </div>
+                <div class="presente-card fade-in-up">
+                    <div class="presente-img">
+                        <img src="https://m.magazineluiza.com.br/a-static/420x420/sanduicheira-grill-mondial-premium-s-19-vermelha-800w/magazineluiza/236683700/7b6dd03546db0f5f36ff367bdb26882a.jpg" alt="Sanduicheira">
+                    </div>
+                    <div class="presente-info">
+                        <h3>Sanduicheira</h3>
+                        <p class="presente-valor">R$ 94,91</p>
+                        <button class="btn-presente" data-item="Sanduicheira" data-valor="94.91">Presentear</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section class="section galeria" id="galeria">
+        <div class="container">
+            <h2 class="section-title">Galeria</h2>
+            <p class="section-subtitle">Momentos que guardamos no coração</p>
+
+            <div class="galeria-grid">
+                <div class="galeria-item fade-in-up">
+                    <img src="img/galeria-1.jpg" alt="Pedro e Alana">
+                </div>
+                <div class="galeria-item fade-in-up">
+                    <img src="img/galeria-2.jpg" alt="Pedro e Alana">
+                </div>
+                <div class="galeria-item fade-in-up">
+                    <img src="img/galeria-3.jpg" alt="Pedro e Alana">
+                </div>
+                <div class="galeria-item fade-in-up">
+                    <img src="img/galeria-4.jpg" alt="Pedro e Alana">
+                </div>
+                <div class="galeria-item fade-in-up">
+                    <img src="img/galeria-5.jpg" alt="Pedro e Alana">
+                </div>
+                <div class="galeria-item fade-in-up">
+                    <img src="img/galeria-6.jpg" alt="Pedro e Alana">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Confirmação de Presença -->
+    <section class="section confirmar" id="confirmar">
+        <div class="container">
+            <h2 class="section-title">Confirmar Presença</h2>
+            <p class="section-subtitle">Será uma honra ter você conosco neste dia especial de casamento e chá de casa nova 🏡<br>Para confirmar, escolha ao menos um presente da nossa lista — é a sua forma de abençoar esse novo lar!</p>
+
+            <div class="form-card">
+                <form id="rsvpForm" action="https://formsubmit.co/pedriquedantas@gmail.com" method="POST">
+                    <input type="hidden" name="_subject" value="Nova Confirmação de Presença - Casamento Pedro & Alana">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="text" name="_honey" style="display:none">
+                    <div class="form-group">
+                        <label for="nome">Nome completo</label>
+                        <input type="text" id="nome" name="nome" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mensagem">Mensagem para os noivos (opcional)</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Escreva algo especial..." rows="4"></textarea>
+                    </div>
+                    <button type="submit" class="btn-submit">Confirmar Presença</button>
+                </form>
+                <div class="form-success" id="formSuccess" hidden>
+                    <div class="success-icon">✅</div>
+                    <h3>Presença Confirmada!</h3>
+                    <p>Obrigado! Estamos ansiosos para celebrar com você.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p class="footer-names">Pedro & Alana</p>
+            <p class="footer-date">30 de Outubro de 2026</p>
+            <p class="footer-msg">Feito com ❤️ para o nosso grande dia</p>
+        </div>
+    </footer>
+
+    <!-- Modal Presente -->
+    <div class="modal" id="modalPresente" hidden>
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <button class="modal-close" id="modalClose" aria-label="Fechar">&times;</button>
+            <h3 id="modalTitle">Presentear</h3>
+            <p id="modalDesc">Você escolheu presentear com:</p>
+            <div class="modal-pix">
+                <p>Faça um Pix no valor de <strong id="modalValor">R$ 0</strong></p>
+                <p style="margin-top: 10px;"><strong>Titular:</strong> Pedro Henrique Dantas da Silva</p>
+                <p><strong>Chave (CPF):</strong> <code>099.094.295-35</code></p>
+            </div>
+            <button class="btn-submit" id="modalCopyPix">Copiar Chave Pix</button>
+        </div>
+    </div>
+
+    <script src="js/main.js"></script>
+</body>
+</html>
