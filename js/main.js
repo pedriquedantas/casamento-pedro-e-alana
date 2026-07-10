@@ -94,14 +94,21 @@ rsvpForm.addEventListener('submit', (e) => {
 
     const formData = new FormData(rsvpForm);
 
-    fetch(rsvpForm.action, {
+    fetch('https://formsubmit.co/ajax/pedriquedantas@gmail.com', {
         method: 'POST',
-        body: formData,
-        headers: { 'Accept': 'application/json' }
+        body: new URLSearchParams(formData),
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded',
+            'Accept': 'application/json'
+        }
     }).then(response => {
-        rsvpForm.hidden = true;
-        formSuccess.hidden = false;
-        showToast('Presença confirmada com sucesso! 🎉');
+        if (response.ok) {
+            rsvpForm.hidden = true;
+            formSuccess.hidden = false;
+            showToast('Presença confirmada com sucesso! 🎉');
+        } else {
+            throw new Error('Erro no envio');
+        }
     }).catch(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Confirmar Presença';
@@ -164,7 +171,8 @@ function copiarPix() {
     });
 }
 
-document.getElementById('btnCopyPix').addEventListener('click', copiarPix);
+const btnCopyPix = document.getElementById('btnCopyPix');
+if (btnCopyPix) btnCopyPix.addEventListener('click', copiarPix);
 modalCopyPix.addEventListener('click', copiarPix);
 
 // ===== UTILITÁRIOS =====
