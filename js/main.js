@@ -94,15 +94,11 @@ rsvpForm.addEventListener('submit', (e) => {
 
     const formData = new FormData(rsvpForm);
 
-    fetch('https://formsubmit.co/ajax/pedriquedantas@gmail.com', {
+    fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: new URLSearchParams(formData),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-            'Accept': 'application/json'
-        }
-    }).then(response => {
-        if (response.ok) {
+        body: formData
+    }).then(response => response.json()).then(data => {
+        if (data.success) {
             rsvpForm.hidden = true;
             formSuccess.hidden = false;
             showToast('Presença confirmada com sucesso! 🎉');
