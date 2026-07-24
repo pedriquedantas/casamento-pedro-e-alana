@@ -35,6 +35,7 @@ body {
     color: var(--text);
     line-height: 1.7;
     overflow-x: hidden;
+    -webkit-text-size-adjust: 100%;
 }
 
 img {
@@ -465,7 +466,14 @@ button {
 .modal-intro {
     max-width: 450px;
     text-align: center;
-    padding: 50px 40px;
+    padding: 40px 25px;
+    border-radius: var(--radius);
+    align-self: center;
+    max-height: none;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    word-wrap: break-word;
+    overflow-x: hidden;
 }
 
 .intro-animation {
@@ -473,36 +481,37 @@ button {
 }
 
 .intro-icon {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
+    font-size: 3rem;
+    margin-bottom: 15px;
     animation: pulse 2s infinite;
 }
 
 .modal-intro h3 {
     font-family: var(--font-display);
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     color: var(--accent);
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
 
 .modal-intro p {
     color: var(--text-light);
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     line-height: 1.7;
-    margin-bottom: 12px;
+    margin-bottom: 10px;
+    word-wrap: break-word;
 }
 
 .intro-paleta {
-    margin-top: 15px;
+    margin-top: 12px;
     padding: 10px;
     background: var(--bg-alt);
     border-radius: 8px;
-    font-size: 0.85rem !important;
+    font-size: 0.82rem !important;
 }
 
 .btn-ver-presentes {
-    margin-top: 25px;
-    padding: 14px 30px;
+    margin-top: 20px;
+    padding: 14px 25px;
     background: var(--primary);
     color: white;
     border: none;
@@ -511,11 +520,11 @@ button {
     font-weight: 700;
     cursor: pointer;
     transition: all var(--transition);
+    width: 100%;
 }
 
 .btn-ver-presentes:hover {
     background: var(--primary-dark);
-    transform: translateY(-2px);
 }
 
 @keyframes introFadeIn {
@@ -696,9 +705,10 @@ button {
     inset: 0;
     z-index: 2000;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
-    padding: 20px;
+    padding: 0;
+    overflow: hidden;
 }
 
 .modal[hidden] {
@@ -716,12 +726,31 @@ button {
     z-index: 1;
     background: var(--white);
     padding: 30px;
-    border-radius: var(--radius);
+    border-radius: 16px 16px 0 0;
     max-width: 700px;
     width: 100%;
     max-height: 85vh;
-    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
     box-shadow: var(--shadow-lg);
+}
+
+.modal-content.modal-intro {
+    border-radius: var(--radius);
+    max-width: 450px;
+    align-self: center;
+    max-height: none;
+}
+
+.modal-presentes {
+    padding-bottom: 0;
+}
+
+.modal-presentes-scroll {
+    overflow-y: auto;
+    flex: 1;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 10px;
 }
 
 .modal-close {
@@ -733,6 +762,7 @@ button {
     color: var(--text-light);
     transition: color var(--transition);
     cursor: pointer;
+    z-index: 10;
 }
 
 .modal-close:hover {
@@ -762,6 +792,7 @@ button {
     text-align: center;
     cursor: pointer;
     transition: all var(--transition);
+    position: relative;
 }
 
 .modal-presente-item:hover {
@@ -798,7 +829,6 @@ button {
 .modal-presente-item.presenteado {
     opacity: 0.4;
     pointer-events: none;
-    position: relative;
 }
 
 .modal-presente-item.presenteado::after {
@@ -819,7 +849,6 @@ button {
 .modal-presente-item.selecionado {
     border-color: var(--primary);
     background: rgba(74, 103, 65, 0.08);
-    position: relative;
 }
 
 .modal-presente-item.selecionado::before {
@@ -840,19 +869,16 @@ button {
     z-index: 1;
 }
 
-/* Footer do modal */
+/* Footer do modal - fixo no bottom */
 .modal-footer {
-    position: sticky;
-    bottom: -30px;
     background: var(--white);
-    padding: 18px 5px;
+    padding: 16px 0;
     border-top: 1px solid #eee;
-    margin-top: 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    z-index: 5;
+    flex-shrink: 0;
 }
 
 .modal-status {
@@ -918,6 +944,10 @@ button {
         padding: 60px 0;
     }
 
+    .section-subtitle {
+        padding: 0 10px;
+    }
+
     .galeria-grid {
         grid-template-columns: repeat(2, 1fr);
     }
@@ -931,32 +961,42 @@ button {
     }
 
     .form-card {
-        padding: 25px;
+        padding: 20px 16px;
+        margin: 0 5px;
+    }
+
+    .modal {
+        padding: 0;
+        align-items: flex-end;
+    }
+
+    .modal-content {
+        padding: 20px 16px 0;
+        max-height: 92vh;
+        border-radius: 16px 16px 0 0;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .modal-content.modal-intro {
+        max-height: 85vh;
+        border-radius: 16px 16px 0 0;
+        max-width: 100%;
+        padding: 30px 20px;
+        overflow-y: auto;
+        -webkit-overflow-scrolling: touch;
     }
 
     .modal-presentes-grid {
         grid-template-columns: repeat(2, 1fr);
-    }
-
-    .modal-content {
-        padding: 20px;
-        max-height: 90vh;
-        border-radius: 16px 16px 0 0;
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        max-width: 100%;
-        margin: 0;
+        gap: 10px;
     }
 
     .modal-footer {
-        position: sticky;
-        bottom: -20px;
         flex-direction: column;
         gap: 10px;
-        padding: 15px 0;
-        margin-bottom: 0;
+        padding: 14px 0;
+        padding-bottom: env(safe-area-inset-bottom, 14px);
     }
 
     .btn-confirmar-presentes {
@@ -972,6 +1012,19 @@ button {
     .modal-presente-nome {
         font-size: 0.7rem;
     }
+
+    .modal-presente-valor {
+        font-size: 0.75rem;
+    }
+
+    .hero-title {
+        font-size: 2.8rem;
+    }
+
+    .hero-msg {
+        font-size: 0.9rem;
+        padding: 0 10px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -986,5 +1039,9 @@ button {
 
     .modal-content h3 {
         font-size: 1.2rem;
+    }
+
+    .hero-title {
+        font-size: 2.4rem;
     }
 }
