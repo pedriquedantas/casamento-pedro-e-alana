@@ -1,7 +1,6 @@
 // ===== CONFIGURAÇÕES =====
 const CONFIG = {
-    dataCasamento: new Date('2026-10-30T17:00:00'),
-    pixKey: '099.094.295-35'
+    dataCasamento: new Date('2026-10-30T17:00:00')
 };
 
 // ===== NAVBAR =====
@@ -10,11 +9,7 @@ const navToggle = document.getElementById('navToggle');
 const navMenu = document.getElementById('navMenu');
 
 window.addEventListener('scroll', () => {
-    if (window.scrollY > 50) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
+    navbar.classList.toggle('scrolled', window.scrollY > 50);
 });
 
 navToggle.addEventListener('click', () => {
@@ -22,7 +17,6 @@ navToggle.addEventListener('click', () => {
     navMenu.classList.toggle('active');
 });
 
-// Fechar menu ao clicar em um link
 navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
         navToggle.classList.remove('active');
@@ -31,11 +25,6 @@ navMenu.querySelectorAll('a').forEach(link => {
 });
 
 // ===== CONTAGEM REGRESSIVA =====
-const diasEl = document.getElementById('dias');
-const horasEl = document.getElementById('horas');
-const minutosEl = document.getElementById('minutos');
-const segundosEl = document.getElementById('segundos');
-
 function atualizarContagem() {
     const agora = new Date();
     const diferenca = CONFIG.dataCasamento - agora;
@@ -46,40 +35,172 @@ function atualizarContagem() {
         return;
     }
 
-    const dias = Math.floor(diferenca / (1000 * 60 * 60 * 24));
-    const horas = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
-    const minutos = Math.floor((diferenca / (1000 * 60)) % 60);
-    const segundos = Math.floor((diferenca / 1000) % 60);
-
-    diasEl.textContent = dias;
-    horasEl.textContent = horas;
-    minutosEl.textContent = minutos;
-    segundosEl.textContent = segundos;
+    document.getElementById('dias').textContent = Math.floor(diferenca / (1000 * 60 * 60 * 24));
+    document.getElementById('horas').textContent = Math.floor((diferenca / (1000 * 60 * 60)) % 24);
+    document.getElementById('minutos').textContent = Math.floor((diferenca / (1000 * 60)) % 60);
+    document.getElementById('segundos').textContent = Math.floor((diferenca / 1000) % 60);
 }
 
 setInterval(atualizarContagem, 1000);
 atualizarContagem();
 
 // ===== SCROLL ANIMATIONS =====
-function initScrollAnimations() {
-    const elements = document.querySelectorAll('.fade-in-up');
-
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1,
-        rootMargin: '0px 0px -50px 0px'
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+        }
     });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-    elements.forEach(el => observer.observe(el));
+document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
+
+// ===== PRESENTES - MÚLTIPLA SELEÇÃO =====
+let presentesSelecionados = [];
+const presentesContainer = document.getElementById('presentesEscolhidos');
+const presenteHidden = document.getElementById('presenteHidden');
+const btnEscolher = document.getElementById('btnEscolherPresente');
+const modalIntro = document.getElementById('modalIntro');
+const modalPresentes = document.getElementById('modalPresentes');
+const modalClose = document.getElementById('modalClose');
+const btnVerPresentes = document.getElementById('btnVerPresentes');
+
+function atualizarPresentes() {
+    if (presentesSelecionados.length === 0) {
+        presentesContainer.innerHTML = '<p class="presentes-placeholder">Nenhum presente selecionado ainda</p>';
+        presenteHidden.value = '';
+    } else {
+        presentesContainer.innerHTML = presentesSelecionados.map((p, i) =>
+            `<span class="presente-tag">${p.nome} <button class="remover-presente" data-index="${i}">&times;</button></span>`
+        ).join('');
+        presenteHidden.value = presentesSelecionados.map(p => `${p.nome} (${p.valor})`).join(', ');
+    }
 }
 
-initScrollAnimations();
+// Remover presente
+presentesContainer.addEventListener('click', (e) => {
+    if (e.target.classList.contains('remover-presente')) {
+        const index = parseInt(e.target.dataset.index);
+        const removido = presentesSelecionados[index].nome;
+        presentesSelecionados.splice(index, 1);
+        atualizarPresentes();
+
+        // Desmarcar no modal também
+        document.querySelectorAll('.modal-presente-item').forEach(item => {
+            if (item.dataset.item === removido) {
+                item.classList.remove('selecionado');
+            }
+        });
+        atualizarStatusModal();
+    }
+});
+
+// Abrir modal intro ao clicar no botão
+let jaViuIntro = false;
+btnEscolher.addEventListener('click', () => {
+    if (!jaViuIntro) {
+        modalIntro.hidden = false;
+        document.body.style.overflow = 'hidden';
+        jaViuIntro = true;
+    } else {
+        modalPresentes.hidden = false;
+        document.body.style.overflow = 'hidden';
+        sincronizarModal();
+    }
+});
+
+// Do intro para os presentes
+btnVerPresentes.addEventListener('click', () => {
+    modalIntro.hidden = true;
+    modalPresentes.hidden = false;
+    sincronizarModal();
+});
+
+// Sincronizar estado visual do modal com presentes selecionados
+function sincronizarModal() {
+    document.querySelectorAll('.modal-presente-item:not(.presenteado)').forEach(item => {
+        const nome = item.dataset.item;
+        if (presentesSelecionados.find(p => p.nome === nome)) {
+            item.classList.add('selecionado');
+        } else {
+            item.classList.remove('selecionado');
+        }
+    });
+    atualizarStatusModal();
+}
+
+// Fechar modal intro clicando no overlay
+modalIntro.querySelector('.modal-overlay').addEventListener('click', () => {
+    modalIntro.hidden = true;
+    document.body.style.overflow = '';
+});
+
+// Fechar modal presentes
+function fecharModalPresentes() {
+    modalPresentes.hidden = true;
+    document.body.style.overflow = '';
+}
+
+modalClose.addEventListener('click', fecharModalPresentes);
+modalPresentes.querySelector('.modal-overlay').addEventListener('click', fecharModalPresentes);
+
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        if (!modalPresentes.hidden) fecharModalPresentes();
+        else if (!modalIntro.hidden) {
+            modalIntro.hidden = true;
+            document.body.style.overflow = '';
+        }
+    }
+});
+
+// Selecionar presente no modal (toggle)
+const modalStatus = document.getElementById('modalStatus');
+const btnConfirmar = document.getElementById('btnConfirmarPresentes');
+
+function atualizarStatusModal() {
+    const count = presentesSelecionados.length;
+    if (count === 0) {
+        modalStatus.textContent = 'Nenhum presente selecionado';
+    } else if (count === 1) {
+        modalStatus.textContent = '1 presente selecionado';
+    } else {
+        modalStatus.textContent = `${count} presentes selecionados`;
+    }
+}
+
+document.querySelectorAll('.modal-presente-item:not(.presenteado)').forEach(item => {
+    item.addEventListener('click', () => {
+        const nome = item.dataset.item;
+        const valor = parseFloat(item.dataset.valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+        // Toggle: se já selecionado, remove
+        const index = presentesSelecionados.findIndex(p => p.nome === nome);
+        if (index !== -1) {
+            presentesSelecionados.splice(index, 1);
+            item.classList.remove('selecionado');
+            showToast(`${nome} removido`);
+        } else {
+            presentesSelecionados.push({ nome, valor });
+            item.classList.add('selecionado');
+            showToast(`${nome} adicionado! ✓`);
+        }
+
+        atualizarPresentes();
+        atualizarStatusModal();
+    });
+});
+
+// Botão "Pronto" fecha o modal
+btnConfirmar.addEventListener('click', () => {
+    if (presentesSelecionados.length === 0) {
+        showToast('Selecione ao menos um presente!');
+        return;
+    }
+    fecharModalPresentes();
+    showToast(`${presentesSelecionados.length} presente(s) escolhido(s)! Agora confirme sua presença.`);
+});
 
 // ===== FORMULÁRIO RSVP =====
 const rsvpForm = document.getElementById('rsvpForm');
@@ -87,6 +208,12 @@ const formSuccess = document.getElementById('formSuccess');
 
 rsvpForm.addEventListener('submit', (e) => {
     e.preventDefault();
+
+    if (presentesSelecionados.length === 0) {
+        showToast('Escolha ao menos um presente! 🎁');
+        btnEscolher.click();
+        return;
+    }
 
     const submitBtn = rsvpForm.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
@@ -103,111 +230,41 @@ rsvpForm.addEventListener('submit', (e) => {
             formSuccess.hidden = false;
             showToast('Presença confirmada com sucesso! 🎉');
         } else {
-            throw new Error('Erro no envio');
+            throw new Error('Erro');
         }
     }).catch(() => {
         submitBtn.disabled = false;
         submitBtn.textContent = 'Confirmar Presença';
-        showToast('Erro ao enviar. Verifique sua conexão e tente novamente.');
+        showToast('Erro ao enviar. Tente novamente.');
     });
 });
 
-// ===== MARCAR PRESENTEADOS =====
-document.querySelectorAll('.presente-card.presenteado .btn-presente').forEach(btn => {
-    btn.textContent = 'Presenteado';
-});
-
-// ===== PRESENTES / MODAL =====
-const modal = document.getElementById('modalPresente');
-const modalClose = document.getElementById('modalClose');
-const modalTitle = document.getElementById('modalTitle');
-const modalValor = document.getElementById('modalValor');
-const modalCopyPix = document.getElementById('modalCopyPix');
-
-document.querySelectorAll('.btn-presente').forEach(btn => {
-    btn.addEventListener('click', () => {
-        const item = btn.dataset.item;
-        const valor = btn.dataset.valor;
-
-        modalTitle.textContent = `Presentear: ${item}`;
-        const valorFormatado = parseFloat(valor).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        modalValor.textContent = valor > 0 ? valorFormatado : 'valor livre';
-        modal.hidden = false;
-        document.body.style.overflow = 'hidden';
+// ===== SMOOTH SCROLL =====
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+            const top = target.getBoundingClientRect().top + window.scrollY - 70;
+            window.scrollTo({ top, behavior: 'smooth' });
+        }
     });
 });
 
-function fecharModal() {
-    modal.hidden = true;
-    document.body.style.overflow = '';
-}
-
-modalClose.addEventListener('click', fecharModal);
-modal.querySelector('.modal-overlay').addEventListener('click', fecharModal);
-
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && !modal.hidden) {
-        fecharModal();
-    }
-});
-
-// ===== COPIAR PIX =====
-function copiarPix() {
-    navigator.clipboard.writeText(CONFIG.pixKey).then(() => {
-        showToast('Chave Pix copiada! 📋');
-    }).catch(() => {
-        // Fallback para navegadores antigos
-        const textArea = document.createElement('textarea');
-        textArea.value = CONFIG.pixKey;
-        document.body.appendChild(textArea);
-        textArea.select();
-        document.execCommand('copy');
-        document.body.removeChild(textArea);
-        showToast('Chave Pix copiada! 📋');
-    });
-}
-
-const btnCopyPix = document.getElementById('btnCopyPix');
-if (btnCopyPix) btnCopyPix.addEventListener('click', copiarPix);
-modalCopyPix.addEventListener('click', copiarPix);
-
-// ===== UTILITÁRIOS =====
-function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-}
-
+// ===== TOAST =====
 function showToast(message) {
-    // Remove toast anterior se existir
-    const existingToast = document.querySelector('.toast');
-    if (existingToast) existingToast.remove();
+    const existing = document.querySelector('.toast');
+    if (existing) existing.remove();
 
     const toast = document.createElement('div');
     toast.className = 'toast';
     toast.textContent = message;
     document.body.appendChild(toast);
 
-    // Trigger animation
-    requestAnimationFrame(() => {
-        toast.classList.add('show');
-    });
+    requestAnimationFrame(() => toast.classList.add('show'));
 
     setTimeout(() => {
         toast.classList.remove('show');
         setTimeout(() => toast.remove(), 400);
     }, 3000);
 }
-
-// ===== SMOOTH SCROLL para links âncora =====
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const target = document.querySelector(this.getAttribute('href'));
-        if (target) {
-            const offset = 70;
-            const top = target.getBoundingClientRect().top + window.scrollY - offset;
-            window.scrollTo({ top, behavior: 'smooth' });
-        }
-    });
-});
