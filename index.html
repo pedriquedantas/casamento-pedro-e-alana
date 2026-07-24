@@ -75,6 +75,10 @@
                         <input type="email" id="email" name="email" placeholder="seu@email.com" required>
                     </div>
                     <div class="form-group">
+                        <label for="mensagem">Mensagem para os noivos (opcional)</label>
+                        <textarea id="mensagem" name="mensagem" placeholder="Escreva algo especial..." rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
                         <label>Presentes escolhidos</label>
                         <div class="presentes-escolhidos" id="presentesEscolhidos">
                             <p class="presentes-placeholder">Nenhum presente selecionado ainda</p>
@@ -82,11 +86,7 @@
                         <input type="hidden" id="presenteHidden" name="presentes" value="">
                     </div>
                     <button type="button" class="btn-escolher-presente" id="btnEscolherPresente">🎁 Escolher Presentes</button>
-                    <div class="form-group">
-                        <label for="mensagem">Mensagem para os noivos (opcional)</label>
-                        <textarea id="mensagem" name="mensagem" placeholder="Escreva algo especial..." rows="4"></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Confirmar Presença</button>
+                    <button type="submit" class="btn-submit">✓ Confirmar Minha Presença</button>
                 </form>
                 <div class="form-success" id="formSuccess" hidden>
                     <div class="success-icon">✅</div>
@@ -388,7 +388,7 @@
             </div>
             <div class="modal-footer" id="modalFooter">
                 <p class="modal-status" id="modalStatus">Nenhum presente selecionado</p>
-                <button class="btn-confirmar-presentes" id="btnConfirmarPresentes">Pronto, finalizar ✓</button>
+                <button class="btn-confirmar-presentes" id="btnConfirmarPresentes">Confirmar Presença ✓</button>
             </div>
         </div>
     </div>

@@ -103,14 +103,17 @@ const modalClose = document.getElementById('modalClose');
 const btnVerPresentes = document.getElementById('btnVerPresentes');
 
 function atualizarPresentes() {
+    const submitBtn = document.querySelector('.btn-submit');
     if (presentesSelecionados.length === 0) {
         presentesContainer.innerHTML = '<p class="presentes-placeholder">Nenhum presente selecionado ainda</p>';
         presenteHidden.value = '';
+        submitBtn.classList.remove('visivel');
     } else {
         presentesContainer.innerHTML = presentesSelecionados.map((p, i) =>
             `<span class="presente-tag">${p.nome} <button class="remover-presente" data-index="${i}">&times;</button></span>`
         ).join('');
         presenteHidden.value = presentesSelecionados.map(p => `${p.nome} (${p.valor})`).join(', ');
+        submitBtn.classList.add('visivel');
     }
 }
 
@@ -222,11 +225,9 @@ document.querySelectorAll('.modal-presente-item:not(.presenteado)').forEach(item
         if (index !== -1) {
             presentesSelecionados.splice(index, 1);
             item.classList.remove('selecionado');
-            showToast(`${nome} removido`);
         } else {
             presentesSelecionados.push({ nome, valor });
             item.classList.add('selecionado');
-            showToast(`${nome} adicionado! ✓`);
         }
 
         atualizarPresentes();
@@ -234,14 +235,27 @@ document.querySelectorAll('.modal-presente-item:not(.presenteado)').forEach(item
     });
 });
 
-// Botão "Pronto" fecha o modal
+// Botão "Pronto" no modal já confirma presença direto
 btnConfirmar.addEventListener('click', () => {
     if (presentesSelecionados.length === 0) {
         showToast('Selecione ao menos um presente!');
         return;
     }
+
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+
+    if (!nome || !email) {
+        fecharModalPresentes();
+        showToast('Preencha seu nome e e-mail primeiro!');
+        document.getElementById('nome').focus();
+        return;
+    }
+
     fecharModalPresentes();
-    showToast(`${presentesSelecionados.length} presente(s) escolhido(s)! Agora confirme sua presença.`);
+    // Dispara o submit do formulário automaticamente
+    atualizarPresentes();
+    rsvpForm.requestSubmit();
 });
 
 // ===== FORMULÁRIO RSVP =====
