@@ -56,6 +56,42 @@ const observer = new IntersectionObserver((entries) => {
 
 document.querySelectorAll('.fade-in-up').forEach(el => observer.observe(el));
 
+// ===== FIREBASE - PRESENTES AUTOMÁTICOS =====
+const FIREBASE_URL = 'https://casamento-pedro-e-alana-default-rtdb.firebaseio.com';
+
+// Carregar presentes já dados ao abrir o site
+async function carregarPresenteados() {
+    try {
+        const response = await fetch(`${FIREBASE_URL}/presenteados.json`);
+        const data = await response.json();
+        if (data) {
+            const nomesPresenteados = Object.values(data);
+            document.querySelectorAll('.modal-presente-item').forEach(item => {
+                if (nomesPresenteados.includes(item.dataset.item)) {
+                    item.classList.add('presenteado');
+                    item.style.opacity = '0.4';
+                    item.style.pointerEvents = 'none';
+                }
+            });
+        }
+    } catch (e) {
+        console.log('Erro ao carregar presenteados:', e);
+    }
+}
+
+// Salvar presentes no Firebase após confirmação
+async function salvarPresenteados(presentes) {
+    for (const p of presentes) {
+        await fetch(`${FIREBASE_URL}/presenteados.json`, {
+            method: 'POST',
+            body: JSON.stringify(p.nome),
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+}
+
+carregarPresenteados();
+
 // ===== PRESENTES - MÚLTIPLA SELEÇÃO =====
 let presentesSelecionados = [];
 const presentesContainer = document.getElementById('presentesEscolhidos');
@@ -226,6 +262,8 @@ rsvpForm.addEventListener('submit', (e) => {
         body: formData
     }).then(response => response.json()).then(data => {
         if (data.success) {
+            // Salvar presentes no Firebase
+            salvarPresenteados(presentesSelecionados);
             rsvpForm.hidden = true;
             formSuccess.hidden = false;
             showToast('Presença confirmada com sucesso! 🎉');
