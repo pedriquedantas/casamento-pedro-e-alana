@@ -248,7 +248,7 @@ btnConfirmar.addEventListener('click', () => {
 const rsvpForm = document.getElementById('rsvpForm');
 const formSuccess = document.getElementById('formSuccess');
 
-rsvpForm.addEventListener('submit', (e) => {
+rsvpForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     if (presentesSelecionados.length === 0) {
@@ -259,6 +259,54 @@ rsvpForm.addEventListener('submit', (e) => {
 
     const submitBtn = rsvpForm.querySelector('button[type="submit"]');
     submitBtn.disabled = true;
+    submitBtn.textContent = 'Verificando disponibilidade...';
+
+    // Verificar se algum presente já foi dado
+    try {
+        const response = await fetch(`${FIREBASE_URL}/presenteados.json`);
+        const data = await response.json();
+        const jaPreseneados = data ? Object.values(data) : [];
+
+        const conflitos = presentesSelecionados.filter(p => jaPreseneados.includes(p.nome));
+
+        if (conflitos.length > 0) {
+            // Remover os que já foram dados
+            conflitos.forEach(c => {
+                const idx = presentesSelecionados.findIndex(p => p.nome === c.nome);
+                if (idx !== -1) presentesSelecionados.splice(idx, 1);
+            });
+            atualizarPresentes();
+            sincronizarModal();
+
+            // Marcar no modal como presenteado
+            document.querySelectorAll('.modal-presente-item').forEach(item => {
+                if (jaPreseneados.includes(item.dataset.item)) {
+                    item.classList.add('presenteado');
+                    item.classList.remove('selecionado');
+                    item.style.opacity = '0.4';
+                    item.style.pointerEvents = 'none';
+                }
+            });
+
+            const nomes = conflitos.map(c => c.nome).join(', ');
+            showToast(`⚠️ ${nomes} já foi presenteado! Escolha outro.`);
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Confirmar Presença';
+            return;
+        }
+    } catch (err) {
+        // Se der erro na verificação, continua mesmo assim
+        console.log('Erro ao verificar:', err);
+    }
+
+    if (presentesSelecionados.length === 0) {
+        showToast('Todos os presentes que você escolheu já foram dados. Escolha outros! 🎁');
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Confirmar Presença';
+        btnEscolher.click();
+        return;
+    }
+
     submitBtn.textContent = 'Enviando...';
 
     const formData = new FormData(rsvpForm);
