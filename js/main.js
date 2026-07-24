@@ -176,6 +176,7 @@ modalIntro.querySelector('.modal-overlay').addEventListener('click', () => {
 function fecharModalPresentes() {
     modalPresentes.hidden = true;
     document.body.style.overflow = '';
+    document.getElementById('modalFooter').classList.remove('visivel');
 }
 
 modalClose.addEventListener('click', fecharModalPresentes);
@@ -197,12 +198,17 @@ const btnConfirmar = document.getElementById('btnConfirmarPresentes');
 
 function atualizarStatusModal() {
     const count = presentesSelecionados.length;
+    const footer = document.getElementById('modalFooter');
     if (count === 0) {
         modalStatus.textContent = 'Nenhum presente selecionado';
-    } else if (count === 1) {
-        modalStatus.textContent = '1 presente selecionado';
+        footer.classList.remove('visivel');
     } else {
-        modalStatus.textContent = `${count} presentes selecionados`;
+        footer.classList.add('visivel');
+        if (count === 1) {
+            modalStatus.textContent = '1 presente selecionado';
+        } else {
+            modalStatus.textContent = `${count} presentes selecionados`;
+        }
     }
 }
 

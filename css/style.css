@@ -750,7 +750,7 @@ button {
     overflow-y: auto;
     flex: 1;
     -webkit-overflow-scrolling: touch;
-    padding-bottom: 10px;
+    padding-bottom: 80px;
 }
 
 .modal-close {
@@ -872,13 +872,23 @@ button {
 /* Footer do modal - fixo no bottom */
 .modal-footer {
     background: var(--white);
-    padding: 16px 0;
+    padding: 14px 20px;
     border-top: 1px solid #eee;
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     flex-shrink: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2010;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.modal-footer.visivel {
+    display: flex;
 }
 
 .modal-status {
@@ -994,9 +1004,9 @@ button {
 
     .modal-footer {
         flex-direction: column;
-        gap: 10px;
-        padding: 14px 0;
-        padding-bottom: env(safe-area-inset-bottom, 14px);
+        gap: 8px;
+        padding: 14px 16px;
+        padding-bottom: calc(14px + env(safe-area-inset-bottom, 0px));
     }
 
     .btn-confirmar-presentes {
