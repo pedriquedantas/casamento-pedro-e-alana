@@ -1,6 +1,6 @@
 // ===== CONFIGURAÇÕES =====
 const CONFIG = {
-    dataCasamento: new Date('2026-10-30T17:00:00')
+    dataCasamento: new Date('2026-10-31T14:00:00')
 };
 
 // ===== NAVBAR =====
