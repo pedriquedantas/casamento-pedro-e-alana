@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Confirmados - Casamento Pedro & Alana</title>
+<style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+        font-family: 'Segoe UI', Arial, sans-serif;
+        background: #f4f1ec;
+        color: #2c2c2c;
+        padding: 30px 20px;
+        line-height: 1.5;
+    }
+    .container { max-width: 1000px; margin: 0 auto; }
+    header {
+        text-align: center;
+        margin-bottom: 30px;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #b0a48f;
+    }
+    header h1 {
+        font-size: 1.9rem;
+        color: #5a4f3f;
+        font-weight: 700;
+        letter-spacing: 1px;
+    }
+    header p { color: #7a7060; margin-top: 6px; font-size: 0.95rem; }
+    .resumo {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin: 20px 0 30px;
+        flex-wrap: wrap;
+    }
+    .resumo-item { text-align: center; }
+    .resumo-num { font-size: 1.8rem; font-weight: 700; color: #5a4f3f; }
+    .resumo-label { font-size: 0.8rem; color: #7a7060; text-transform: uppercase; letter-spacing: 1px; }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background: #fff;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    thead { background: #5a4f3f; color: #fff; }
+    th, td { padding: 12px 14px; text-align: left; vertical-align: top; font-size: 0.85rem; }
+    th { font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; font-size: 0.75rem; }
+    tbody tr:nth-child(even) { background: #faf8f4; }
+    tbody tr { border-bottom: 1px solid #eee; }
+    .col-num { width: 30px; text-align: center; color: #999; }
+    .col-nome { font-weight: 600; color: #3a3428; }
+    .col-presente { color: #6b5d45; }
+    .col-msg { color: #888; font-style: italic; font-size: 0.8rem; }
+    .col-data { white-space: nowrap; color: #999; font-size: 0.8rem; }
+    .col-qtd { text-align: center; white-space: nowrap; }
+    .badge {
+        display: inline-block;
+        min-width: 24px;
+        padding: 2px 8px;
+        border-radius: 12px;
+        background: #e8e2d5;
+        color: #5a4f3f;
+        font-weight: 600;
+        font-size: 0.8rem;
+    }
+    .badge.grupo { background: #c9a86a; color: #fff; }
+    .subtitulo {
+        margin: 40px 0 15px;
+        font-size: 1.3rem;
+        color: #5a4f3f;
+        font-weight: 700;
+        border-left: 4px solid #c9a86a;
+        padding-left: 12px;
+    }
+    footer { text-align: center; margin-top: 30px; color: #a09884; font-size: 0.85rem; }
+    @media print {
+        body { background: #fff; padding: 0; }
+        table { box-shadow: none; }
+        thead { background: #5a4f3f !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <header>
+        <h1>Pedro &amp; Alana</h1>
+        <p>Lista de Convidados Confirmados &middot; 31 de Outubro de 2026</p>
+    </header>
+
+    <div class="resumo">
+        <div class="resumo-item">
+            <div class="resumo-num" id="totalPessoas">0</div>
+            <div class="resumo-label">Pessoas Confirmadas</div>
+        </div>
+        <div class="resumo-item">
+            <div class="resumo-num" id="totalConfirmacoes">0</div>
+            <div class="resumo-label">Confirmações</div>
+        </div>
+        <div class="resumo-item">
+            <div class="resumo-num">37</div>
+            <div class="resumo-label">Presentes Escolhidos</div>
+        </div>
+    </div>
+
+    <table>
+        <thead>
+            <tr>
+                <th class="col-num">#</th>
+                <th>Data</th>
+                <th>Nome</th>
+                <th class="col-qtd">Pessoas</th>
+                <th>Presente(s)</th>
+                <th>Mensagem</th>
+            </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+    </table>
+
+    <h2 class="subtitulo">Confirmados por fora (pessoalmente)</h2>
+    <table>
+        <thead>
+            <tr>
+                <th class="col-num">#</th>
+                <th>Nome</th>
+                <th class="col-qtd">Pessoas</th>
+                <th>Observação</th>
+            </tr>
+        </thead>
+        <tbody id="tbodyExtra"></tbody>
+    </table>
+
+    <footer>Feito com &#10084; para o nosso grande dia</footer>
+</div>
+
+<script>
+// Formato: [data, nome, presentes, mensagem, qtdPessoas]
+const dados = [
+    ["03/09/2026","Jorge Luiz Santos Oliveira","Batedeira Planetária Mondial (R$ 349,90)","Deus abençoe sempre",1],
+    ["02/09/2026","Edvania Amor Divino Costa Vieira","Ferro de Passar Black+Decker (R$ 99,90)","Deus abençoe essa união em um momento chamado sempre!",1],
+    ["02/09/2026","Ygor Santos Barbosa","Kit Toalhas Banho 4pç (R$ 149,90)","",1],
+    ["02/09/2026","Franklin Nunes da Silva de Souza","Jogo de Cama Casal 6pç (R$ 149,90)","",1],
+    ["01/09/2026","Naila Santana de Souza","Aspirador de Pó Electrolux (R$ 199,90)","😘🥰🤪🙃",1],
+    ["19/08/2026","Ágda Severo","Cortinas (R$ 89,90)","Deus abençoe a união de vocês ✨❤️",1],
+    ["17/08/2026","Júlia Cunha","Mop Giratório (R$ 105,44)","Parabéns",1],
+    ["17/08/2026","Regiane Sanches e Wesley Sanches","Panela de Pressão (R$ 194,31)","E o cordão de três dobras não se rompe tão depressa. Eclesiastes 4:12. Prima, que Deus seja essa terceira dobra no casamento de vocês. Desejo uma união firme, cheia de amor, fé e propósito. Felicidades!",2],
+    ["17/08/2026","Sabrina Santana Xavier","Kit Utensílios Cozinha 10pç (R$ 79,90)","",1],
+    ["13/08/2026","Iraneide Ribeiro","Aparelho de Jantar 42pç (R$ 287,90)","Parabéns aos noivos, que Deus abençoe vcs muitas felicidades",1],
+    ["07/08/2026","Gildete Santana dos Santos e João Vitor Jacó Batista","Cesto de Roupas (R$ 72,90), Varal de Chão (R$ 69,90)","",2],
+    ["04/08/2026","Tânia, Carlos Reis e Lucca Reis","Escorredor de Pratos Inox (R$ 129,99), Frigideira Tramontina 24cm (R$ 89,90)","Que esse casamento seja abençoado 🙏🏻",3],
+    ["03/08/2026","Suewa e Guilherme","Jogo de Toalhas 4pç (R$ 169,90)","Parabéns amigaaa, que Deus abençoe seu casamento!",2],
+    ["03/08/2026","Ana Caroline Santa Cruz","Assadeiras para Bolo (R$ 69,90)","",1],
+    ["02/08/2026","Rosilene Oliveira de Santana","Sanduicheira (R$ 94,91)","Que Deus abençoe eternamente essa união, o que Ele uniu ninguém pode acabar ❤️❤️",1],
+    ["27/07/2026","Maria Elce da Silva","Conjunto de Xícaras (R$ 74,99)","",1],
+    ["25/07/2026","Carlos Vinicius Silva Santos","Jogo de Taças 6pç (R$ 89,90)","",1],
+    ["25/07/2026","Iasmin Nascimento dos Santos","Ferro de Passar Black+Decker (R$ 99,90)","",1],
+    ["25/07/2026","Juliana Costa Santos","Boleira (R$ 69,90)","",1],
+    ["25/07/2026","Sidney Bonfim Cruz","Processador de Alimentos (R$ 150,00)","Deus abençoe sempre vcs",1],
+    ["25/07/2026","Luan Santana Almeida","Travessa de Vidro (R$ 64,99)","Mxm dos Mxm",1],
+    ["24/07/2026","Antônio Xavier dos Santos","Travesseiros (R$ 49,90)","",1],
+    ["24/07/2026","Lidia dos Santos Conceição, Edilene, Lídia dos Reis, Gilda e Edna Santana dos Santos","Kit de Talheres 24pç (R$ 114,30), Conjuntos de Potes (R$ 69,90)","",5],
+    ["24/07/2026","Alan Carlos dos Santos Rodrigues","Jogo de Lençol (R$ 115,00)","",1],
+    ["24/07/2026","Yasmim Victoria Nunes Assencio de Araújo","Jogo de Copos 6pç (R$ 59,90)","Deus abençoe vcs mt",1],
+    ["24/07/2026","Solange da Silva","Jarra de Suco (R$ 55,09)","",1],
+    ["24/07/2026","Josué Silva Nunes","Liquidificador Mondial Turbo (R$ 139,90)","Que o bom Deus continue abençoando essa união 🙌",1],
+    ["24/07/2026","Syara Maria da Silva","Jogo de Pratos Tramontina 4pç (R$ 119,90), Porta Temperos (R$ 49,90)","Meus parabéns, casal lindo! Que o amor de vocês floresça cada vez mais a cada estação do ano.",1],
+    ["24/07/2026","Luis Filipe Dantas da Silva","Porta Temperos (R$ 49,90), Garrafa Térmica de Café (R$ 59,90)","Mxm. Lasqüida.",1],
+    ["24/07/2026","Tiago dos Santos","Chaleira Elétrica Mondial 2L (R$ 89,90)","",1],
+    ["24/07/2026","Alex Alves de Oliveira Filho","Ralador Inox (R$ 35,00)","Deus abençoe grandemente a vida de vocês e esse casamento! Felicidades 🙌🏼❤️",1],
+    ["24/07/2026","Rafael Dantas da Silva","Jogo de Facas Tramontina 5pç (R$ 49,99)","",1],
+    ["24/07/2026","Davi Silva Nunes Rodrigues","Tábua de Corte Pinus (R$ 59,90)","ELA VEM DE CAJAZEIRAS7",1]
+];
+
+const tbody = document.getElementById('tbody');
+let totalPessoas = 0;
+dados.forEach((d, i) => {
+    const qtd = d[4];
+    totalPessoas += qtd;
+    const badgeClass = qtd > 1 ? 'badge grupo' : 'badge';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td class="col-num">${i + 1}</td>
+        <td class="col-data">${d[0]}</td>
+        <td class="col-nome">${d[1]}</td>
+        <td class="col-qtd"><span class="${badgeClass}">${qtd}</span></td>
+        <td class="col-presente">${d[2]}</td>
+        <td class="col-msg">${d[3] ? '“' + d[3] + '”' : '—'}</td>
+    `;
+    tbody.appendChild(tr);
+});
+
+// Confirmados por fora (pessoalmente) — formato: [nome, observação, qtdPessoas]
+const dadosExtra = [
+    ["Dona Benta, Emanuel e Duda","Confirmado pessoalmente",3],
+    ["Carla Vereno","Confirmado pessoalmente",1]
+];
+
+const tbodyExtra = document.getElementById('tbodyExtra');
+dadosExtra.forEach((d, i) => {
+    const qtd = d[2];
+    totalPessoas += qtd;
+    const badgeClass = qtd > 1 ? 'badge grupo' : 'badge';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+        <td class="col-num">${i + 1}</td>
+        <td class="col-nome">${d[0]}</td>
+        <td class="col-qtd"><span class="${badgeClass}">${qtd}</span></td>
+        <td class="col-msg">${d[1] || '—'}</td>
+    `;
+    tbodyExtra.appendChild(tr);
+});
+
+document.getElementById('totalPessoas').textContent = totalPessoas;
+document.getElementById('totalConfirmacoes').textContent = dados.length + dadosExtra.length;
+</script>
+</body>
+</html>
