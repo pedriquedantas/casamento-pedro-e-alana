@@ -74,6 +74,7 @@ async function carregarPresenteados() {
                 }
             });
         }
+        reordenarPresentes();
     } catch (e) {
         console.log('Erro ao carregar presenteados:', e);
     }
@@ -88,6 +89,15 @@ async function salvarPresenteados(presentes) {
             headers: { 'Content-Type': 'application/json' }
         });
     }
+}
+
+// Move os presentes já dados para o fim da lista (disponíveis em cima)
+function reordenarPresentes() {
+    const grid = document.querySelector('.modal-presentes-grid');
+    if (!grid) return;
+    grid.querySelectorAll('.modal-presente-item.presenteado').forEach(item => {
+        grid.appendChild(item);
+    });
 }
 
 carregarPresenteados();
@@ -301,6 +311,7 @@ rsvpForm.addEventListener('submit', async (e) => {
                     item.style.pointerEvents = 'none';
                 }
             });
+            reordenarPresentes();
 
             const nomes = conflitos.map(c => c.nome).join(', ');
             showToast(`⚠️ ${nomes} já foi presenteado! Escolha outro.`);
